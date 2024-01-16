@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id          String    @id
+  shop        String
+  state       String
+  isOnline    Boolean   @default(false)
+  scope       String?
+  expires     DateTime?
+  accessToken String
+  userId      BigInt?
+}
+
+model tab_employee {
+  id          String    @id
+  name        String
+  date        DateTime
+  ClickRate   Int
+  SKUNumber   Int
+}
+
+model freetrial{
+   id         Int @id
+   price      Int
+   description String
+   buttonText String
+}
+
+model product {
+  id     Int      @id @default(autoincrement())
+  pid    BigInt   @unique
+  title  String
+  category  String
+  images String?
+}
+
+model category_sizing{
+  id     Int      @id @default(autoincrement())
+  category  String  @unique
+  size_chart_url String
+}
